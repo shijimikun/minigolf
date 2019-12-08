@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class ball : MonoBehaviour
 {
+    public GameObject score_object = null;
     bool left_ = false;
     bool right_ = false;
     bool shot = false;
@@ -33,6 +36,8 @@ public class ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Text score_text = score_object.GetComponent<Text>();
+        score_text.text = "count" + count;
         camera_.transform.position = gameObject.transform.position + camerapos;
         if (shot)
         {
@@ -42,8 +47,11 @@ public class ball : MonoBehaviour
         {
             transform.position = respawn;
             rb = gameObject.GetComponent<Rigidbody>();
-            transform.rotation = Quaternion.Euler(0, 0, 0);
             rb.velocity = Vector3.zero;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            Debug.Log("AA");
+
+
         }
         shotpower_y = shotpower * 1.5f;
         if (5 > shotpower)
